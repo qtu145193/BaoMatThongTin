@@ -1,0 +1,41 @@
+﻿@model PagedList.IPagedList<Models.ViewModel.UserViewModel>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "ListUser";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Danh sách người dùng</h2>
+
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">Tables</h1>
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>UserID</th>
+                        <th>UserName</th>
+                        <th>Password</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.IDCode</td>
+                            <td>@item.UserName</td>
+                            <td>@item.UserPassword</td>
+                            <td>@item.Role</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @Html.PagedListPager(Model, page => Url.Action("ListUser", new { page }))
+        </div>
+    </div>
+</div>
