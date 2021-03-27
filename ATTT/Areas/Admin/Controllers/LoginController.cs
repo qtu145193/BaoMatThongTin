@@ -23,7 +23,7 @@ namespace ATTT.Areas.Admin.Controllers
                 //tao bien truy cap db context
                 //kiem tra username va password
                 var dao = new UserDAO();
-                var result = dao.Login(model.userName, model.passWord);
+                var result = dao.Login(model.userName, MaHoaMD5.MD5Hash(model.passWord));
                 //neu ket qua dung thi chuyen qua trang home
                 //neu ket qua sai thi cho dang nhap lai
                 if(result == true)
@@ -46,7 +46,7 @@ namespace ATTT.Areas.Admin.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Đăng nhập không đúng");
+                    ModelState.AddModelError("", "Tên đăng nhập hoặc mật khẩu không đúng");
                 }
             }
             return View("Index");

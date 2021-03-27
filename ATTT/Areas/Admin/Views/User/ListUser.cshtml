@@ -21,6 +21,7 @@
                         <th>UserName</th>
                         <th>Password</th>
                         <th>Role</th>
+                        <th>Công cụ</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,6 +32,11 @@
                             <td>@item.UserName</td>
                             <td>@item.UserPassword</td>
                             <td>@item.Role</td>
+                            <td>
+                                <a href="/Admin/User/EditUser/@item.IDCode">Sửa</a>
+                                ||
+                                <a href="/Admin/User/DeleteUser/@item.IDCode">Xóa</a>
+                            </td>
                         </tr>
                     }
                 </tbody>

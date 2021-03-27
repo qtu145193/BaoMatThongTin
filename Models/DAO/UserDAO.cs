@@ -26,6 +26,7 @@ namespace Models.DAO
                         join c in db.Question1 on
                         a.IDQuestion1 equals c.IDQuestion1
                         where a.IDQuestion1 == c.IDQuestion1
+                        where a.RoleID==2
                         select new UserViewModel()
                         {
                             IDCode = a.IDCode,
@@ -43,6 +44,16 @@ namespace Models.DAO
         {
             return db.Users.SingleOrDefault(x => x.UserName == userName);
         }
+        public User ViewDetail(int? IDCode)
+        {
+            return db.Users.Find(IDCode);
+        }
+        //lay cau hoi bao mat
+        public string getQuestion()
+        {
+            string q = db.Database.SqlQuery<string>("select Question1 as q from Question1").FirstOrDefault();
+            return q;
+        }
         //kiem tra dang nhap
         public bool Login(string username, string password)
         {
@@ -57,6 +68,46 @@ namespace Models.DAO
             {
                 return false;
             }
+        }
+        public int InsertUser(User entity)
+        {
+            db.Users.Add(entity);
+            db.SaveChanges();
+            return entity.IDCode;
+        }
+        public bool UpdateUser(User entity)
+        {
+            try
+            {
+                var user = db.Users.Find(entity.IDCode);
+                user.UserName = entity.UserName.Trim();
+                user.Answer1 = entity.Answer1.Trim();
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+        public bool DeleteUser(int? id)
+        {
+            try
+            {
+                var user = db.Users.Find(id);
+                db.Users.Remove(user);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        //kiem tra username khi dang ky co trung khong
+        public bool CheckUserName(String name)
+        {
+            return db.Users.Count(x => x.UserName == name) > 0;
         }
     }
 }
