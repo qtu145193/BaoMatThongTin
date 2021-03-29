@@ -30,11 +30,9 @@ namespace Models.DAO
                         select new UserViewModel()
                         {
                             IDCode = a.IDCode,
-                            UserName = a.UserName,
-                            UserPassword = a.UserPassword,
+                            Username = a.UserName,
+                            Password = a.UserPassword,
                             Role = b.RoleName,
-                            Question1 = c.Question11,
-                            Answer1 = a.Answer1
                         };
 
             return model.OrderBy(x=>x.IDCode).ToPagedList(page, pageSize);
@@ -47,6 +45,15 @@ namespace Models.DAO
         public User ViewDetail(int? IDCode)
         {
             return db.Users.Find(IDCode);
+        }
+        public UserViewModel ViewUser(int? ID)
+        {
+            UserViewModel user = new UserViewModel();
+            User user1 = db.Users.Find(ID);
+            user.IDCode = user1.IDCode;
+            user.Password = user1.UserPassword;
+            user.Username = user1.UserName;
+            return user;
         }
         //lay cau hoi bao mat
         public string getQuestion()
@@ -85,7 +92,7 @@ namespace Models.DAO
                 db.SaveChanges();
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -96,6 +103,21 @@ namespace Models.DAO
             {
                 var user = db.Users.Find(id);
                 db.Users.Remove(user);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        public bool UpdateUserPass(UserViewModel entity)
+        {
+            try
+            {
+                var user = db.Users.Find(entity.IDCode);
+                user.UserName = entity.Username.TrimEnd();
+                user.UserPassword = entity.Password.Trim();
                 db.SaveChanges();
                 return true;
             }

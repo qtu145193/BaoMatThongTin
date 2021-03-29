@@ -33,7 +33,7 @@ namespace ATTT.Areas.Admin.Controllers
                     if (user.RoleID == 1)
                     {
                         var usersession = new UserLogin();
-                        usersession.userName = user.UserName;
+                        usersession.Username = user.UserName;
                         usersession.userID = user.IDCode;
                         usersession.roleID = user.RoleID;
                         Session.Add(CommonConstant.USER_SESSION, usersession);

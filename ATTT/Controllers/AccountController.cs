@@ -2,6 +2,7 @@
 using ATTT.Models;
 using Models.DAO;
 using Models.Framework;
+using Models.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace ATTT.Controllers
                 {
                     var user = dao.getByID(model.Username);
                     var usersession = new UserLogin();
-                    usersession.userName = user.UserName;
+                    usersession.Username = user.UserName;
                     usersession.userID = user.IDCode;
                     usersession.roleID = user.RoleID;
                     Session.Add(CommonConstant.USER_SESSION, usersession);
@@ -84,9 +85,43 @@ namespace ATTT.Controllers
                 } 
             return View(model);
         }
-        public ActionResult UserDetail()
+        public ActionResult UserDetail(int? id)
         {
-            return View();
+
+            if (!id.Equals(null))
+            {
+                if (Session[CommonConstant.USER_SESSION] == null)
+                {
+                    return RedirectToAction("Login");
+                }
+                else
+                {
+                    var dao = new UserDAO();
+                    return View(dao.ViewUser(id));
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UserDetail(UserViewModel user) 
+        {
+            if (ModelState.IsValid)
+            {
+                var dao = new UserDAO();
+                user.Password = MaHoaMD5.MD5Hash(user.Password);
+                var result = dao.UpdateUserPass(user);
+                if (result == true)
+                {
+                    ViewBag.Success = "Thay đổi thành công";
+                }
+                else
+                {
+                   ModelState.AddModelError("", "Thay đổi không thành công");
+                }
+            }
+            return View(user);
+
         }
         public ActionResult Logout()
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -9,8 +10,7 @@ namespace ATTT
     public class UserLogin
     {
         public int userID { set; get; }
-        public string userName { set; get; }
+        public string Username { get; set; }
         public int roleID { set; get; }
-
     }
 }

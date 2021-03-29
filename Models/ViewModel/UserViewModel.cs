@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,10 +10,18 @@ namespace Models.ViewModel
     public class UserViewModel
     {
         public int IDCode { get; set; }
-        public string UserName { get; set; }
-        public string UserPassword { get; set; }
-        public string Answer1 { get; set; }
-        public string Question1 { get; set; }
+        [Display(Name = "Tên đăng nhập")]
+        public string Username { get; set; }
+
+        [Required(ErrorMessage = "Yêu cầu nhập mật khẩu")]
+        [DataType(DataType.Password)]
+        [StringLength(50, MinimumLength = 4, ErrorMessage = "Độ dài mật khẩu ít nhất là 4 ký tự")]
+        [Display(Name = "Mật khẩu")]
+        public string Password { get; set; }
+        [Required(ErrorMessage = "Yêu cầu nhập lại mật khẩu")]
+        [Display(Name = "Xác nhận mật khẩu")]
+        [Compare("Password", ErrorMessage = "Mật khẩu xác nhận không đúng")]
+        public string ConfirmPassword { get; set; }
         public string Role { get; set; }
     }
 }
