@@ -37,6 +37,7 @@ namespace ATTT.Controllers
                     usersession.userID = user.IDCode;
                     usersession.roleID = user.RoleID;
                     Session.Add(CommonConstant.USER_SESSION, usersession);
+                    dao.LoginHistory(usersession.userID);
                     return RedirectToAction("Index","Home");
                 }
                 else
@@ -113,6 +114,7 @@ namespace ATTT.Controllers
                 var result = dao.UpdateUserPass(user);
                 if (result == true)
                 {
+                    dao.ChangeHistory(user.IDCode);
                     ViewBag.Success = "Thay đổi thành công";
                 }
                 else

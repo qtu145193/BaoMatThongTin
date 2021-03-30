@@ -6,40 +6,23 @@ namespace Models.Framework
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("User")]
-    public partial class User
+    [Table("Action")]
+    public partial class Action
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
+        public Action()
         {
             ActionDetails = new HashSet<ActionDetail>();
         }
 
         [Key]
-        public int IDCode { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int IDAction { get; set; }
 
-        public int RoleID { get; set; }
-
-        [Required]
         [StringLength(50)]
-        public string UserPassword { get; set; }
-
-        [Required]
-        [StringLength(50)]
-        public string UserName { get; set; }
-
-        public DateTime? DateTimeLogin { get; set; }
-
-        public int? IDQuestion1 { get; set; }
-
-        [StringLength(10)]
-        public string Answer1 { get; set; }
+        public string ActionName { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ActionDetail> ActionDetails { get; set; }
-
-        public virtual Question1 Question1 { get; set; }
-
-        public virtual Role Role { get; set; }
     }
 }

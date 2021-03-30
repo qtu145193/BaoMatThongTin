@@ -1,0 +1,39 @@
+﻿@model PagedList.IPagedList<Models.ViewModel.UserActionDetail>
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "ListAction";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lịch sử hoạt động user</h2>
+
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>UserID</th>
+                        <th>UserName</th>
+                        <th>Hoạt động</th>
+                        <th>Thời gian</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.IDCode</td>
+                            <td>@item.User</td>
+                            <td>@item.Action</td>
+                            <td>@item.Time</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @Html.PagedListPager(Model, page => Url.Action("ListUser", new { page }))
+        </div>
+    </div>
+</div>

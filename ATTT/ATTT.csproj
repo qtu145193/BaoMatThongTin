@@ -2025,6 +2025,7 @@
     <Content Include="Areas\Admin\Views\User\CreateUser.cshtml" />
     <Content Include="Areas\Admin\Views\User\EditUser.cshtml" />
     <Content Include="Areas\Admin\Views\User\DeleteUser.cshtml" />
+    <Content Include="Areas\Admin\Views\User\ListAction.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
