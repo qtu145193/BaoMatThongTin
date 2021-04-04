@@ -55,7 +55,7 @@ namespace Models.DAO
                             Action = b.ActionName,
                             Time = a.Time,
                         };
-            return model.OrderBy(x => x.Time).ToPagedList(page, pageSize);
+            return model.OrderByDescending(x => x.Time).ToPagedList(page, pageSize);
         }
         //lay id cua user
         public User getByID(string userName)
