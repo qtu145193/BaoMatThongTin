@@ -60,11 +60,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAO\UserDAO.cs" />
-    <Compile Include="Framework\atttContextDB.cs" />
+    <Compile Include="Framework\Action.cs" />
+    <Compile Include="Framework\ActionDetail.cs" />
+    <Compile Include="Framework\atttDBContext.cs" />
     <Compile Include="Framework\Question1.cs" />
     <Compile Include="Framework\Role.cs" />
+    <Compile Include="Framework\sysdiagram.cs" />
     <Compile Include="Framework\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\UserActionDetail.cs" />
     <Compile Include="ViewModel\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -11,11 +11,11 @@ namespace Models.DAO
     public class UserDAO
     {
         //khoi tao dd context
-        public atttContextDB db = null;
+        public atttDBContext db = null;
 
         public UserDAO()
         {
-            db = new atttContextDB();
+            db = new atttDBContext();
         }
         public IEnumerable<UserViewModel> ListAllPaging(int page, int pageSize)
         {
@@ -36,6 +36,26 @@ namespace Models.DAO
                         };
 
             return model.OrderBy(x=>x.IDCode).ToPagedList(page, pageSize);
+        }
+        public IEnumerable<UserActionDetail> ListAction(int page, int pageSize)
+        {
+            var model = from a in db.ActionDetails
+                        join b in db.Actions on
+                        a.IDAction equals b.IDAction
+                        where a.IDAction == b.IDAction
+                        join c in db.Users on
+                        a.IDCode equals c.IDCode
+                        where a.IDCode == c.IDCode
+                        select new UserActionDetail()
+                        {
+                            ID = a.IDAc,
+                            IDCode = a.IDCode,
+                            IDAction = b.IDAction,
+                            User = c.UserName,
+                            Action = b.ActionName,
+                            Time = a.Time,
+                        };
+            return model.OrderByDescending(x => x.Time).ToPagedList(page, pageSize);
         }
         //lay id cua user
         public User getByID(string userName)
@@ -130,6 +150,25 @@ namespace Models.DAO
         public bool CheckUserName(String name)
         {
             return db.Users.Count(x => x.UserName == name) > 0;
+        }
+        //cac hàm lưu lịch sử
+        public void LoginHistory(int id)
+        {
+            ActionDetail userAction = new ActionDetail();
+            userAction.IDCode = id;
+            userAction.IDAction = 3;
+            userAction.Time = DateTime.Now;
+            db.ActionDetails.Add(userAction);
+            db.SaveChanges();
+        }
+        public void ChangeHistory(int id)
+        {
+            ActionDetail userAction = new ActionDetail();
+            userAction.IDCode = id;
+            userAction.IDAction = 4;
+            userAction.Time = DateTime.Now;
+            db.ActionDetails.Add(userAction);
+            db.SaveChanges();
         }
     }
 }

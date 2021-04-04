@@ -19,6 +19,13 @@ namespace ATTT.Areas.Admin.Controllers
             var model = dao.ListAllPaging(page, pageSize);
             return View(model);
         }
+        // GET: Admin/User
+        public ActionResult ListAction(int page = 1, int pageSize = 10)
+        {
+            var dao = new UserDAO();
+            var model = dao.ListAction(page, pageSize);
+            return View(model);
+        }
         public ActionResult CreateUser()
         {
             return View();
