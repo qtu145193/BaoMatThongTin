@@ -52,17 +52,18 @@ namespace ATTT.Controllers
         {
             var dao = new UserDAO();
             RegisterViewModel model = new RegisterViewModel();
-            model.Question1 = dao.getQuestion().Trim();
             return View(model);
         }
         [HttpPost]
         public ActionResult Register(RegisterViewModel model)
-        { 
+        {
+            if (ModelState.IsValid)
+            {
                 var dao = new UserDAO();
                 model.Question1 = dao.getQuestion().Trim();
-            //neu name bi trung thi tra ve true 
-            //bao cho nguoi dung la ten bi trung
-            if (dao.CheckUserName(model.Username))
+                //neu name bi trung thi tra ve true 
+                //bao cho nguoi dung la ten bi trung
+                if (dao.CheckUserName(model.Username))
                 {
                     ModelState.AddModelError("", "Tên đăng nhập đã tồn tại");
                 }
@@ -83,7 +84,8 @@ namespace ATTT.Controllers
                     {
                         ModelState.AddModelError("", "Đăng ký không thành công");
                     }
-                } 
+                }
+            }
             return View(model);
         }
         public ActionResult UserDetail(int? id)

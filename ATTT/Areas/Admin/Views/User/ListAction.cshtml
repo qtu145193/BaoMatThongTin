@@ -1,5 +1,4 @@
-﻿@model PagedList.IPagedList<Models.ViewModel.UserActionDetail>
-@using PagedList.Mvc
+﻿@model List<Models.ViewModel.UserActionDetail>
 @{
     ViewBag.Title = "ListAction";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -33,7 +32,6 @@
                     }
                 </tbody>
             </table>
-            @Html.PagedListPager(Model, page => Url.Action("ListUser", new { page }))
         </div>
     </div>
 </div>

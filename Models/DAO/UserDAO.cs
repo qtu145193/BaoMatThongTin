@@ -11,11 +11,11 @@ namespace Models.DAO
     public class UserDAO
     {
         //khoi tao dd context
-        public atttDBContext db = null;
+        public atttDataContext db = null;
 
         public UserDAO()
         {
-            db = new atttDBContext();
+            db = new atttDataContext();
         }
         public IEnumerable<UserViewModel> ListAllPaging(int page, int pageSize)
         {
@@ -37,7 +37,7 @@ namespace Models.DAO
 
             return model.OrderBy(x=>x.IDCode).ToPagedList(page, pageSize);
         }
-        public IEnumerable<UserActionDetail> ListAction(int page, int pageSize)
+        public List<UserActionDetail> ListAction()
         {
             var model = from a in db.ActionDetails
                         join b in db.Actions on
@@ -55,7 +55,7 @@ namespace Models.DAO
                             Action = b.ActionName,
                             Time = a.Time,
                         };
-            return model.OrderBy(x => x.Time).ToPagedList(page, pageSize);
+            return model.OrderByDescending(x => x.Time).ToList();
         }
         //lay id cua user
         public User getByID(string userName)
@@ -166,6 +166,24 @@ namespace Models.DAO
             ActionDetail userAction = new ActionDetail();
             userAction.IDCode = id;
             userAction.IDAction = 4;
+            userAction.Time = DateTime.Now;
+            db.ActionDetails.Add(userAction);
+            db.SaveChanges();
+        }
+        public void SelectHistory(int id)
+        {
+            ActionDetail userAction = new ActionDetail();
+            userAction.IDCode = id;
+            userAction.IDAction = 5;
+            userAction.Time = DateTime.Now;
+            db.ActionDetails.Add(userAction);
+            db.SaveChanges();
+        }
+        public void UpdateHistory(int id)
+        {
+            ActionDetail userAction = new ActionDetail();
+            userAction.IDCode = id;
+            userAction.IDAction = 2;
             userAction.Time = DateTime.Now;
             db.ActionDetails.Add(userAction);
             db.SaveChanges();

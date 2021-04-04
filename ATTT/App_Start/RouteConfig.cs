@@ -14,11 +14,17 @@ namespace ATTT
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                namespaces: new[] {"ATTT.Controllers"}
+                name: "Weapon",
+                url: "weapon/{action}/{id}",
+                defaults: new { controller = "Weapon", action = "ListWeapon", id = UrlParameter.Optional },
+                namespaces: new[] { "ATTT.Controllers" }
             );
+            routes.MapRoute(
+               name: "Default",
+               url: "{controller}/{action}/{id}",
+               defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+               namespaces: new[] { "ATTT.Controllers" }
+           );
         }
     }
 }

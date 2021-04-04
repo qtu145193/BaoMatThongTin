@@ -59,17 +59,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAO\ProductDAO.cs" />
     <Compile Include="DAO\UserDAO.cs" />
     <Compile Include="Framework\Action.cs" />
     <Compile Include="Framework\ActionDetail.cs" />
-    <Compile Include="Framework\atttDBContext.cs" />
+    <Compile Include="Framework\atttDataContext.cs" />
+    <Compile Include="Framework\Order.cs" />
+    <Compile Include="Framework\OrderDetail.cs" />
     <Compile Include="Framework\Question1.cs" />
     <Compile Include="Framework\Role.cs" />
     <Compile Include="Framework\sysdiagram.cs" />
     <Compile Include="Framework\User.cs" />
+    <Compile Include="Framework\Weapon.cs" />
+    <Compile Include="Framework\WeaponClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\UserActionDetail.cs" />
     <Compile Include="ViewModel\UserViewModel.cs" />
+    <Compile Include="ViewModel\WeaponViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

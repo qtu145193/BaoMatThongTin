@@ -32,7 +32,11 @@ namespace ATTT.Models
         [Display(Name = "Xác nhận mật khẩu")]
         [Compare("Password",ErrorMessage ="Mật khẩu xác nhận không đúng")]
         public string  ConfirmPassword{ get; set; }
-
+        [Display(Name = "Số điện thoại")]
+        [StringLength(10, MinimumLength = 10, ErrorMessage = "Độ dài mật khẩu ít nhất là 9 số")]
+        public string Phone { get; set; }
+        [Display(Name = "Địa chỉ")]
+        public string Address { get; set; }
         [Display(Name = "Câu hỏi bảo mật")]
         public string Question1 { get; set; }
         [Required(ErrorMessage ="Phải trả lời câu hỏi")]

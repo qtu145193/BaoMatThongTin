@@ -20,10 +20,10 @@ namespace ATTT.Areas.Admin.Controllers
             return View(model);
         }
         // GET: Admin/User
-        public ActionResult ListAction(int page = 1, int pageSize = 10)
+        public ActionResult ListAction(int page = 2, int pageSize = 10)
         {
             var dao = new UserDAO();
-            var model = dao.ListAction(page, pageSize);
+            var model = dao.ListAction();
             return View(model);
         }
         public ActionResult CreateUser()

@@ -13,6 +13,7 @@ namespace Models.Framework
         public User()
         {
             ActionDetails = new HashSet<ActionDetail>();
+            Orders = new HashSet<Order>();
         }
 
         [Key]
@@ -28,15 +29,22 @@ namespace Models.Framework
         [StringLength(50)]
         public string UserName { get; set; }
 
-        public DateTime? DateTimeLogin { get; set; }
-
         public int? IDQuestion1 { get; set; }
 
         [StringLength(10)]
         public string Answer1 { get; set; }
 
+        [StringLength(10)]
+        public string Phone { get; set; }
+
+        [StringLength(200)]
+        public string Address { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ActionDetail> ActionDetails { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
 
         public virtual Question1 Question1 { get; set; }
 
