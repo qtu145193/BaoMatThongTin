@@ -36,8 +36,12 @@ namespace ATTT.Controllers
                     usersession.Username = user.UserName;
                     usersession.userID = user.IDCode;
                     usersession.roleID = user.RoleID;
+                    usersession.Follow = user.Follow;
                     Session.Add(CommonConstant.USER_SESSION, usersession);
-                    dao.LoginHistory(usersession.userID);
+                    if (usersession.Follow == true)
+                    {
+                        dao.LoginHistory(usersession.userID);
+                    }                   
                     return RedirectToAction("Index","Home");
                 }
                 else
@@ -60,7 +64,6 @@ namespace ATTT.Controllers
             if (ModelState.IsValid)
             {
                 var dao = new UserDAO();
-                model.Question1 = dao.getQuestion().Trim();
                 //neu name bi trung thi tra ve true 
                 //bao cho nguoi dung la ten bi trung
                 if (dao.CheckUserName(model.Username))
@@ -75,6 +78,9 @@ namespace ATTT.Controllers
                     user.Answer1 = model.Answer1;
                     user.RoleID = 2;
                     user.IDQuestion1 = 1;
+                    user.Phone = model.Phone;
+                    user.Address = model.Address;
+                    user.Follow = true;
                     var result = dao.InsertUser(user);
                     if (result > 0)
                     {
@@ -114,14 +120,20 @@ namespace ATTT.Controllers
                 var dao = new UserDAO();
                 user.Password = MaHoaMD5.MD5Hash(user.Password);
                 var result = dao.UpdateUserPass(user);
+                var sess = (UserLogin)Session[CommonConstant.USER_SESSION];
                 if (result == true)
                 {
-                    dao.ChangeHistory(user.IDCode);
+                    if ( sess.Follow== true)
+                    {
+                        dao.ChangeHistory(user.IDCode);
+                    }
                     ViewBag.Success = "Thay đổi thành công";
+                    Session[CommonConstant.USER_SESSION] = null;
                 }
                 else
                 {
                    ModelState.AddModelError("", "Thay đổi không thành công");
+                   return View(user);
                 }
             }
             return View(user);

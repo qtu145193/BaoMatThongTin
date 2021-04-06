@@ -10,6 +10,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+<div class="container register">
     <div class="form-group">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @if (@ViewBag.Success != null)
@@ -17,58 +18,57 @@
             <div class="alert alert-success">@ViewBag.Success</div>
         }
     </div>
-    <div class="container register">
-        <marquee direction="right" style="color: whitesmoke;font-weight:bold;"> Người thành công luôn đi một mình</marquee>
-        <div class="row">
-            <div class="col-md-3 register-left">
-                <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
-                <h3>Welcome</h3>
-            </div>
-            <div class="col-md-9 register-right">
-                <h3 class="register-heading">Đăng ký thành viên</h3>
-                <div class="row register-form">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <span class="fa fa-user" aria-hidden="true"></span>
-                            @Html.TextBoxFor(m => m.Username, new { @class = "form-control", placeholder = "User Name"})
-                            @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group">
-                            @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", placeholder = "Phone" })
-                            @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group">
-                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
-                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+    <marquee direction="right" style="color: whitesmoke;font-weight:bold;"> Người thành công luôn đi một mình</marquee>
+    <div class="row">
+        <div class="col-md-3 register-left">
+            <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
+            <h3>Welcome</h3>
+        </div>
+        <div class="col-md-9 register-right">
+            <h3 class="register-heading">Đăng ký thành viên</h3>
+            <div class="row register-form">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <span class="fa fa-user" aria-hidden="true"></span>
+                        @Html.TextBoxFor(m => m.Username, new { @class = "form-control", placeholder = "User Name" })
+                        @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", placeholder = "Phone" })
+                        @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
 
-                        </div>
-                        <div class="form-group">
-                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
-                            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
-                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            @Html.TextAreaFor(m => m.Address, new { @class = "form-control", placeholder = "Home Address" })
-                            @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group">
-                            <select class="form-control">
-                                <option class="hidden" selected disabled>Hãy chọn câu hỏi bảo mật</option>
-                                <option>Con vật mà bạn yêu thích?</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            @Html.TextBoxFor(m => m.Answer1, new { @class = "form-control", placeholder = "Your Answer" })
-                            @Html.ValidationMessageFor(m => m.Answer1, "", new { @class = "text-danger" })
-                        </div>
-                        <input type="submit" class="btnRegister" value="Register" />
+                    <div class="form-group">
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
+                        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
                     </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.TextAreaFor(m => m.Address, new { @class = "form-control", placeholder = "Home Address" })
+                        @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control">
+                            <option class="hidden" selected disabled>Hãy chọn câu hỏi bảo mật</option>
+                            <option>Con vật mà bạn yêu thích?</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.Answer1, new { @class = "form-control", placeholder = "Your Answer" })
+                        @Html.ValidationMessageFor(m => m.Answer1, "", new { @class = "text-danger" })
+                    </div>
+                    <input type="submit" class="btnRegister" value="Register" />
                 </div>
             </div>
         </div>
-
     </div>
+
+</div>
 }
 
 

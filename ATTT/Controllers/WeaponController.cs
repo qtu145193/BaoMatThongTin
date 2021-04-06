@@ -23,7 +23,10 @@ namespace ATTT.Controllers
             var sess = (UserLogin)Session[CommonConstant.USER_SESSION];
             var product = new ProductDAO().ViewDetail(id);
             var userDao = new UserDAO();
-            userDao.SelectHistory(sess.userID);
+            if (sess.Follow == true)
+            {
+                userDao.SelectHistory(sess.userID);
+            }
             return View(product);
         }
         public ActionResult ChangeDetail(int id)
@@ -42,7 +45,10 @@ namespace ATTT.Controllers
                 {
                     var userDao = new UserDAO();
                     var sess = (UserLogin)Session[CommonConstant.USER_SESSION];
-                    userDao.UpdateHistory(sess.userID);
+                    if (sess.Follow == true)
+                    {
+                        userDao.UpdateHistory(sess.userID);
+                    }                    
                     return RedirectToAction("ListWeapon");
                 }
                 else

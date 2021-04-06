@@ -8,7 +8,7 @@ namespace Models.Framework
     public partial class atttDataContext : DbContext
     {
         public atttDataContext()
-            : base("name=atttDataContext")
+            : base("name=atttDataContext1")
         {
         }
 

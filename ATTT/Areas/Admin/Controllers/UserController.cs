@@ -7,6 +7,8 @@ using System.Web.Mvc;
 using PagedList;
 using Models.Framework;
 using System.Net;
+using Models.ViewModel;
+using ATTT.Common;
 
 namespace ATTT.Areas.Admin.Controllers
 {
@@ -20,7 +22,7 @@ namespace ATTT.Areas.Admin.Controllers
             return View(model);
         }
         // GET: Admin/User
-        public ActionResult ListAction(int page = 2, int pageSize = 10)
+        public ActionResult ListAction()
         {
             var dao = new UserDAO();
             var model = dao.ListAction();
@@ -37,6 +39,7 @@ namespace ATTT.Areas.Admin.Controllers
             {
                 //luu nguoi dung moi vao database
                 var dao = new UserDAO();
+                user.UserPassword = MaHoaMD5.MD5Hash(user.UserPassword);
                 int id = dao.InsertUser(user);
                 if (id > 0)
                 {
@@ -101,6 +104,12 @@ namespace ATTT.Areas.Admin.Controllers
                 ViewBag.ErrorMessage = "Xóa người dùng không thành công";
             }
             return View("DeleteUser");
+        }
+        public ActionResult Notify(int id)
+        {
+            var dao = new UserDAO();
+            dao.ChangeFollow(id);
+            return RedirectToAction("ListUser");
         }
     }
 }

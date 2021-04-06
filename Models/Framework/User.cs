@@ -40,6 +40,8 @@ namespace Models.Framework
         [StringLength(200)]
         public string Address { get; set; }
 
+        public bool Follow { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ActionDetail> ActionDetails { get; set; }
 

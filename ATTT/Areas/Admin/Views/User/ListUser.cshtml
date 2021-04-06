@@ -11,37 +11,51 @@
 <h1 class="h3 mb-2 text-gray-800">Tables</h1>
 
 <!-- DataTales Example -->
-<div class="card shadow mb-4">
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>UserID</th>
-                        <th>UserName</th>
-                        <th>Password</th>
-                        <th>Role</th>
-                        <th>Công cụ</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
+@using (Html.BeginForm("ListUser", "User", FormMethod.Post))
+{
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
                         <tr>
-                            <td>@item.IDCode</td>
-                            <td>@item.Username</td>
-                            <td>@item.Password</td>
-                            <td>@item.Role</td>
-                            <td>
-                                <a href="/Admin/User/EditUser/@item.IDCode">Sửa</a>
-                                ||
-                                <a href="/Admin/User/DeleteUser/@item.IDCode">Xóa</a>
-                            </td>
+                            <th>UserID</th>
+                            <th>UserName</th>
+                            <th>Password</th>
+                            <th>Role</th>
+                            <th>Công cụ</th>
+                            <th>Follow</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
-            @Html.PagedListPager(Model, page => Url.Action("ListUser", new { page }))
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.IDCode</td>
+                                <td>@item.Username</td>
+                                <td>@item.Password</td>
+                                <td>@item.Role</td>
+                                <td>
+                                    <a href="/Admin/User/EditUser/@item.IDCode">Sửa</a>
+                                    ||
+                                    <a href="/Admin/User/DeleteUser/@item.IDCode">Xóa</a>
+                                </td>
+                                @{
+                                    if (@item.Follow)
+                                    {
+                                        <td>Đang theo dõi <a href="Notify/@item.IDCode" class="btn btn-info" role="button">Change</a></td>
+                                    }
+                                    else
+                                    {
+                                        <td>Không theo dõi <a href="Notify/@item.IDCode" class="btn btn-info" role="button">Change</a></td>
+                                    }
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                @Html.PagedListPager(Model, page => Url.Action("ListUser", new { page }))
+            </div>
         </div>
     </div>
-</div>
+}

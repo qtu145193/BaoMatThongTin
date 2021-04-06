@@ -23,5 +23,8 @@ namespace Models.ViewModel
         [Compare("Password", ErrorMessage = "Mật khẩu xác nhận không đúng")]
         public string ConfirmPassword { get; set; }
         public string Role { get; set; }
+        public string Phone { get; set; }
+        public string Address { get; set; }
+        public bool Follow { get; set; }
     }
 }

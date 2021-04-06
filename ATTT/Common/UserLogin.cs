@@ -12,5 +12,6 @@ namespace ATTT
         public int userID { set; get; }
         public string Username { get; set; }
         public int roleID { set; get; }
+        public bool? Follow { get; set; }
     }
 }

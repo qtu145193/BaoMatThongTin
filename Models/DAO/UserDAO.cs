@@ -33,6 +33,8 @@ namespace Models.DAO
                             Username = a.UserName,
                             Password = a.UserPassword,
                             Role = b.RoleName,
+                            Phone = a.Phone,
+                            Follow = a.Follow
                         };
 
             return model.OrderBy(x=>x.IDCode).ToPagedList(page, pageSize);
@@ -73,6 +75,7 @@ namespace Models.DAO
             user.IDCode = user1.IDCode;
             user.Password = user1.UserPassword;
             user.Username = user1.UserName;
+            user.Phone = user1.Phone;
             return user;
         }
         //lay cau hoi bao mat
@@ -107,6 +110,7 @@ namespace Models.DAO
             try
             {
                 var user = db.Users.Find(entity.IDCode);
+                user.Phone = entity.Phone;
                 user.UserName = entity.UserName.Trim();
                 user.Answer1 = entity.Answer1.Trim();
                 db.SaveChanges();
@@ -136,8 +140,7 @@ namespace Models.DAO
             try
             {
                 var user = db.Users.Find(entity.IDCode);
-                user.UserName = entity.Username.TrimEnd();
-                user.UserPassword = entity.Password.Trim();
+                user.UserPassword = entity.Password;
                 db.SaveChanges();
                 return true;
             }
@@ -186,6 +189,19 @@ namespace Models.DAO
             userAction.IDAction = 2;
             userAction.Time = DateTime.Now;
             db.ActionDetails.Add(userAction);
+            db.SaveChanges();
+        }
+        public void ChangeFollow(int iduser)
+        {                
+            var user = db.Users.Find(iduser);
+            if (user.Follow == true)
+            {
+                user.Follow = false;
+            }
+            else
+            {
+                user.Follow = true;
+            }
             db.SaveChanges();
         }
     }

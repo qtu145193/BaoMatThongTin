@@ -1,0 +1,21 @@
+﻿input.toggle-btn {
+    visibility: hidden;
+}
+
+    input.toggle-btn::before {
+        content: attr(value);
+        display: inline-block;
+        padding: 3px;
+        background: #C0C0C0;
+        font-size: 10pt;
+        color: black;
+        border-radius: 5px;
+        border: 1px solid #aaa;
+        visibility: visible;
+    }
+
+    input.toggle-btn:checked::before {
+        background: #7CFC00;        
+        color: #eee;
+        border-color: #eee;
+    }
